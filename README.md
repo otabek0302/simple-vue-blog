@@ -1,158 +1,111 @@
 # Simple Vue Blog
 
-A modern, responsive blog application built with Vue 3, featuring a clean design and reusable UI components.
+A full-stack blog application built with Vue.js 3 and Django REST Framework.
 
-## 🚀 Features
-
-- **Modern Vue 3** with Composition API
-- **Responsive Design** with mobile-first approach
-- **Reusable UI Components** (Button, Input, Text)
-- **Form Validation** with proper autocomplete attributes
-- **Code Formatting** with Prettier
-- **Vue Router** for navigation
-- **Floating Label Inputs** with smooth animations
-
-## 🛠️ Tech Stack
-
-- **Vue 3** - Progressive JavaScript framework
-- **Vite** - Fast build tool and dev server
-- **Vue Router** - Official router for Vue.js
-- **Prettier** - Code formatter
-- **CSS3** - Modern styling with animations
-
-## 📁 Project Structure
+## 📋 Project Structure
 
 ```
-src/
-├── components/
-│   ├── ui/           # Reusable UI components
-│   │   ├── Button.vue
-│   │   ├── Input.vue
-│   │   └── Text.vue
-│   └── layout/       # Layout components
-│       ├── Header.vue
-│       └── Footer.vue
-├── views/            # Page components
-│   ├── HomeView.vue
-│   ├── LoginView.vue
-│   ├── RegisterView.vue
-│   └── ForgotPasswordView.vue
-├── router/           # Vue Router configuration
-└── assets/           # Static assets
+simple-vue-blog/
+├── backend-django/          # Django REST API backend
+├── client-vue/              # Vue.js 3 frontend
+└── README.md               # This file
 ```
 
-## 🎨 UI Components
-
-### Button Component
-- Multiple variants: `primary`, `secondary`, `outline`, `success`, `danger`
-- Loading state with spinner
-- Disabled state support
-- Custom class support
-
-### Input Component
-- Floating label animation
-- Form validation support
-- Autocomplete attributes
-- Error state styling
-- Multiple input types
-
-### Text Component
-- Semantic HTML elements (h1-h6, p, span, div, label)
-- Color variants: `primary`, `title`, `subtitle`, `text`, `link`, `error`, `success`, `white`
-- Text alignment: `left`, `center`, `right`, `justify`
-- Text transform: `uppercase`, `lowercase`, `capitalize`
-- Font weight: `bold`, `normal`, `light`
-
-## 🚀 Getting Started
+## 🚀 Quick Start
 
 ### Prerequisites
 
-- Node.js (v20.19.0 or higher)
-- npm or yarn
+- Python 3.8+
+- Node.js 16+
+- npm or pnpm
 
-### Installation
+### Backend Setup
 
-1. Clone the repository:
 ```bash
-git clone https://github.com/otabek0302/simple-vue-blog.git
-cd simple-vue-blog
+cd backend-django
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+pip install -r requirements.txt
+python manage.py migrate
+python manage.py runserver
 ```
 
-2. Install dependencies:
+Backend will run on: `http://localhost:8000`
+
+### Frontend Setup
+
 ```bash
-npm install
+cd client-vue
+npm install  # or pnpm install
+npm run dev  # or pnpm dev
 ```
 
-3. Start the development server:
-```bash
-npm run dev
-```
+Frontend will run on: `http://localhost:5173`
 
-4. Open your browser and navigate to `http://localhost:5173`
+## 📚 Documentation
 
-## 📜 Available Scripts
+- [Backend Documentation](./backend-django/README.md)
+- [Frontend Documentation](./client-vue/README.md)
 
-- `npm run dev` - Start development server with hot reload
-- `npm run build` - Build for production
-- `npm run preview` - Preview production build
-- `npm run format` - Format code with Prettier
-- `npm run format:check` - Check code formatting
+## 🛠️ Tech Stack
 
-## 🎯 Development Setup
+### Backend
+- Django 5.2.7
+- Django REST Framework 3.16.1
+- Simple JWT 5.5.1
+- Django CORS Headers 4.9.0
+- SQLite (development)
 
-### Recommended IDE Setup
+### Frontend
+- Vue.js 3
+- Vue Router 4
+- Vuex 4
+- Axios
+- Vite
+- Vue Sonner (Toast notifications)
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (disable Vetur if installed).
+## ✨ Features
 
-### Browser DevTools
+- ✅ User authentication (Register, Login, Logout)
+- ✅ Password reset functionality
+- ✅ JWT token-based authentication
+- ✅ Persistent login state
+- ✅ Responsive design
+- ✅ Toast notifications
+- ✅ Modern UI with custom components
 
-- **Chrome/Edge**: [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
-- **Firefox**: [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
+## 🔐 API Endpoints
 
-## 🔧 Configuration
+### Authentication
+- `POST /api/register/` - User registration
+- `POST /api/login/` - User login
+- `POST /api/forgot-password/` - Request password reset
+- `POST /api/reset-password/` - Reset password with token
 
-- **Vite**: See [Vite Configuration Reference](https://vite.dev/config/)
-- **Prettier**: Configured in `.prettierrc`
-- **Vue Router**: Configured in `src/router/index.js`
+## 📝 Development
 
-## 📱 Responsive Design
+### Backend Development
+See [backend-django/README.md](./backend-django/README.md) for detailed backend development instructions.
 
-The application is fully responsive and optimized for:
-- Mobile devices (320px+)
-- Tablets (768px+)
-- Desktop (1024px+)
-
-## 🎨 Design System
-
-### Colors
-- Primary: `#0057ff`
-- Text: `#010101`, `#323232`, `#555555`
-- Success: `#28a745`
-- Error: `#dc3545`
-- White: `#ffffff`
-
-### Typography
-- Font weights: 300 (light), 400 (normal), 600 (bold)
-- Text transforms: uppercase, lowercase, capitalize
-- Line height: 1.25
+### Frontend Development
+See [client-vue/README.md](./client-vue/README.md) for detailed frontend development instructions.
 
 ## 🤝 Contributing
 
 1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
 ## 📄 License
 
-This project is open source and available under the [MIT License](LICENSE).
+This project is open source and available under the MIT License.
 
-## 👨‍💻 Author
+## 👨‍💻 Developer
 
-**Otabek**
-- GitHub: [@otabek0302](https://github.com/otabek0302)
+Developed by [@amonovotabek](https://github.com/otabek0302)
 
 ---
 
-⭐ Star this repository if you found it helpful!
+© 2025 Simple Vue Blog. All rights reserved.
