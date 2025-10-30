@@ -7,8 +7,16 @@
 }
 .reset-password-view__container {
   width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.reset-password-view__content {
+  width: 100%;
   max-width: 480px;
   padding: 0 16px;
+  margin: 0 auto;
 }
 
 .reset-password-view__form {
@@ -73,23 +81,25 @@
 <template>
   <section class="reset-password-view">
     <div class="reset-password-view__container">
-      <form name="reset-password-form" @submit.prevent="handleResetPassword" class="reset-password-view__form">
-        <div class="reset-password-view__form-header">
-          <Text type="h3" variant="primary" weight="bold" align="center" transform="uppercase">Reset Password</Text>
-        </div>
-        <div class="reset-password-view__form-body">
-          <Input v-model="password" type="password" label="New Password" placeholder="New Password" autocomplete="new-password" />
-          <Input v-model="confirmPassword" type="password" label="Confirm Password" placeholder="Confirm Password" autocomplete="new-password" />
-        </div>
-        <div class="reset-password-view__form-footer">
-          <Button variant="outline" type="submit" :disabled="!password || !confirmPassword" class="reset-password-view__form-footer-button"> Reset Password </Button>
-        </div>
-        <div class="reset-password-view__form-links">
-          <RouterLink :to="{ name: 'login' }" class="reset-password-view__form-link"> Login </RouterLink>
-          <span class="reset-password-view__form-link-separator">|</span>
-          <RouterLink :to="{ name: 'register' }" class="reset-password-view__form-link"> Register </RouterLink>
-        </div>
-      </form>
+      <div class="reset-password-view__content">
+        <form name="reset-password-form" @submit.prevent="handleResetPassword" class="reset-password-view__form">
+          <div class="reset-password-view__form-header">
+            <Text type="h3" variant="primary" weight="bold" align="center" transform="uppercase">Reset Password</Text>
+          </div>
+          <div class="reset-password-view__form-body">
+            <Input v-model="password" type="password" label="New Password" placeholder="New Password" autocomplete="new-password" />
+            <Input v-model="confirmPassword" type="password" label="Confirm Password" placeholder="Confirm Password" autocomplete="new-password" />
+          </div>
+          <div class="reset-password-view__form-footer">
+            <Button variant="outline" type="submit" :disabled="!password || !confirmPassword" class="reset-password-view__form-footer-button"> Reset Password </Button>
+          </div>
+          <div class="reset-password-view__form-links">
+            <RouterLink :to="{ name: 'login' }" class="reset-password-view__form-link"> Login </RouterLink>
+            <span class="reset-password-view__form-link-separator">|</span>
+            <RouterLink :to="{ name: 'register' }" class="reset-password-view__form-link"> Register </RouterLink>
+          </div>
+        </form>
+      </div>
     </div>
   </section>
 </template>

@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
-import { HomeView, LoginView, RegisterView, ForgotPasswordView, ResetPasswordView } from "@/views";
+import { HomeView, LoginView, RegisterView, ForgotPasswordView, ResetPasswordView, ProfileView, PostDetailView } from "@/views";
 
 import store from "@/store";
 
@@ -33,7 +33,23 @@ const router = createRouter({
       path: "/reset-password",
       name: "reset-password",
       component: ResetPasswordView,
-    }
+    },
+    {
+      path: "/profile",
+      name: "profile",
+      component: ProfileView,
+      meta: {
+        requiresAuth: true,
+      },
+    },
+    {
+      path: "/posts/:id",
+      name: "post-detail",
+      component: PostDetailView,
+      meta: {
+        requiresAuth: true,
+      },
+    },
   ],
 });
 

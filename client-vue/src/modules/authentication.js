@@ -85,8 +85,6 @@ export default {
             commit("SET_ERROR", null);
             try {
                 const response = await AuthenticationService.forgotPassword(payload);
-                commit("SET_USER", response.user);
-                commit("SET_TOKENS", response.tokens);
                 commit("SET_SUCCESS", response.message || "Forgot password successful");
                 return { success: true, message: response.message };
             } catch (err) {
@@ -106,6 +104,74 @@ export default {
                 return { success: true, message: response.message };
             } catch (err) {
                 const message = err.response?.data?.message || "Reset password failed";
+                commit("SET_ERROR", message);
+                return { success: false, message };
+            } finally {
+                commit("SET_LOADING", false);
+            }
+        },
+        async updateProfile({ commit, state }, payload) {
+            commit("SET_LOADING", true);
+            commit("SET_ERROR", null);
+            try {
+                const response = await AuthenticationService.updateProfile(payload);
+                const nextUser = response?.user || { ...state.user, ...payload };
+                commit("SET_USER", nextUser);
+                commit("SET_SUCCESS", response?.message || "Profile updated successfully");
+                return { success: true, user: nextUser, message: response?.message };
+            } catch (err) {
+                const message = err.response?.data?.message || "Update profile failed";
+                commit("SET_ERROR", message);
+                return { success: false, message };
+            } finally {
+                commit("SET_LOADING", false);
+            }
+        },
+        async changePassword({ commit }, payload) {
+            commit("SET_LOADING", true);
+            commit("SET_ERROR", null);
+            try {
+                const response = await AuthenticationService.changePassword(payload);
+                commit("SET_SUCCESS", response?.message || "Password updated successfully");
+                return { success: true, message: response?.message };
+            } catch (err) {
+                const message = err.response?.data?.message || "Update password failed";
+                commit("SET_ERROR", message);
+                return { success: false, message };
+            } finally {
+                commit("SET_LOADING", false);
+            }
+        },
+        async updateAvatar({ commit }, file) {
+            commit("SET_LOADING", true);
+            commit("SET_ERROR", null);
+            try {
+                const response = await AuthenticationService.updateAvatar(file);
+                if (response?.user) {
+                    commit("SET_USER", response.user);
+                }
+                commit("SET_SUCCESS", response?.message || "Avatar updated successfully");
+                return { success: true, message: response?.message };
+            } catch (err) {
+                const message = err.response?.data?.message || "Avatar update failed";
+                commit("SET_ERROR", message);
+                return { success: false, message };
+            } finally {
+                commit("SET_LOADING", false);
+            }
+        },
+        async removeAvatar({ commit }) {
+            commit("SET_LOADING", true);
+            commit("SET_ERROR", null);
+            try {
+                const response = await AuthenticationService.removeAvatar();
+                if (response?.user) {
+                    commit("SET_USER", response.user);
+                }
+                commit("SET_SUCCESS", response?.message || "Avatar removed successfully");
+                return { success: true, message: response?.message };
+            } catch (err) {
+                const message = err.response?.data?.message || "Avatar remove failed";
                 commit("SET_ERROR", message);
                 return { success: false, message };
             } finally {

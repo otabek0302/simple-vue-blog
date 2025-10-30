@@ -1,9 +1,40 @@
 from django.urls import path
-from .views import RegistrationViewSet, LoginView, ForgotPasswordView, ResetPasswordView
+from .views import (
+    RegistrationViewSet,
+    LoginView,
+    ForgotPasswordView,
+    ResetPasswordView,
+    UpdateProfileView,
+    ChangePasswordView,
+    UpdateAvatarView,
+    MyPostsView,
+    LikedPostsView,
+    PostsListCreateView,
+    PostsOthersListView,
+    PostDetailUpdateDeleteView,
+    LikePostView,
+    UnlikePostView,
+    PostCommentsListCreateView,
+    PostCommentDetailView,
+    UserPostsView,
+)
 
 urlpatterns = [
     path("register/", RegistrationViewSet.as_view(), name="register"),
     path("login/", LoginView.as_view(), name="login"),
     path("forgot-password/", ForgotPasswordView.as_view(), name="forgot-password"),
     path("reset-password/", ResetPasswordView.as_view(), name="reset-password"),
+    path("update-profile/", UpdateProfileView.as_view(), name="update-profile"),
+    path("change-password/", ChangePasswordView.as_view(), name="change-password"),
+    path("update-avatar/", UpdateAvatarView.as_view(), name="update-avatar"),
+    path("posts/me/", MyPostsView.as_view(), name="my-posts"),
+    path("posts/liked/", LikedPostsView.as_view(), name="liked-posts"),
+    path("posts/", PostsListCreateView.as_view(), name="posts-list-create"),
+    path("posts/others/", PostsOthersListView.as_view(), name="posts-others"),
+    path("posts/<int:pk>/", PostDetailUpdateDeleteView.as_view(), name="post-detail"),
+    path("posts/<int:pk>/like/", LikePostView.as_view(), name="post-like"),
+    path("posts/<int:pk>/unlike/", UnlikePostView.as_view(), name="post-unlike"),
+    path("posts/<int:post_pk>/comments/", PostCommentsListCreateView.as_view(), name="post-comments"),
+    path("comments/<int:pk>/", PostCommentDetailView.as_view(), name="comment-detail"),
+    path("users/<int:user_pk>/posts/", UserPostsView.as_view(), name="user-posts"),
 ]
