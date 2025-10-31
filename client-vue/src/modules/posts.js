@@ -161,6 +161,24 @@ export default {
       } finally { commit("SET_LOADING", false); }
     },
 
+    async fetchUserPosts({ commit }, { userId, page = 1, search = "" } = {}) {
+      commit("SET_LOADING", true); commit("SET_ERROR", null);
+      try {
+        const data = await PostsService.fetchUserPosts(userId, page, search);
+        commit("SET_ITEMS", data?.results || []);
+        commit("SET_PAGINATION", {
+          count: data?.count || 0,
+          next: data?.next,
+          previous: data?.previous,
+          currentPage: page,
+        });
+        return { success: true, data };
+      } catch (err) {
+        const message = err.response?.data?.message || "Failed to load user posts";
+        commit("SET_ERROR", message); return { success: false, message };
+      } finally { commit("SET_LOADING", false); }
+    },
+
     async createPost({ commit }, payload) {
       commit("SET_LOADING", true); commit("SET_ERROR", null);
       try {

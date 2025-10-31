@@ -675,5 +675,13 @@ class UserPostsView(generics.GenericAPIView):
 
     def get(self, request, user_pk, *args, **kwargs):
         posts = Posts.objects.filter(author_id=user_pk).order_by("-created_at")
+
+        # Handle search query
+        search_query = request.query_params.get("search", "").strip()
+        if search_query:
+            posts = posts.filter(
+                Q(title__icontains=search_query) | Q(content__icontains=search_query)
+            )
+
         serializer = PostSerializer(posts, many=True, context={"request": request})
         return Response({"results": serializer.data}, status=status.HTTP_200_OK)

@@ -76,6 +76,12 @@ const PostsService = {
   deleteComment: async (commentId) => {
     await api.delete(`/comments/${commentId}/`);
   },
+  fetchUserPosts: async (userId, page = 1, search = "") => {
+    const params = { page };
+    if (search) params.search = search;
+    const { data } = await api.get(`/users/${userId}/posts/`, { params });
+    return data;
+  },
 };
 
 export default PostsService;
