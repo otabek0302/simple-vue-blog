@@ -251,6 +251,7 @@ import Skeleton from "@/components/ui/Skeleton.vue";
 
 import { toast } from "vue-sonner";
 import { mapGetters } from "vuex";
+import { gettersTypes } from "@/modules/types";
 
 export default {
   components: { Tabs, Card, Post, EditProfile, EditPassword, CreatePost, UpdatePost, Uploader, Skeleton, Pagination, Input, toast },
@@ -277,10 +278,10 @@ export default {
     };
   },
   computed: {
-    ...mapGetters("authentication", ["[authentication] USER"]),
-    user() {
-      return this.$store.state.authentication.user;
-    },
+    ...mapGetters("authentication", {
+      isAuthenticated: gettersTypes.IS_AUTHENTICATED,
+      user: gettersTypes.USER,
+    }),
     pagination() {
       return this.$store.state.posts.pagination;
     },
